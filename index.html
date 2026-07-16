@@ -767,6 +767,67 @@
   }
   .cta-section .btn-primary { font-size: 1.15rem; padding: 16px 36px; }
 
+  .contact-form {
+    max-width: 620px;
+    margin: 30px auto 0;
+    padding: 28px;
+    background: var(--white);
+    color: var(--navy);
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.28);
+  }
+  .contact-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .contact-field { display: flex; flex-direction: column; gap: 6px; }
+  .contact-field--full { grid-column: 1 / -1; }
+  .contact-field label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .contact-field input,
+  .contact-field textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 13px;
+    background: var(--white);
+    color: var(--navy);
+    font: inherit;
+    font-size: 1rem;
+  }
+  .contact-field textarea { min-height: 130px; resize: vertical; }
+  .contact-field input:focus,
+  .contact-field textarea:focus {
+    outline: 3px solid rgba(230,126,34,0.24);
+    border-color: var(--orange);
+  }
+  .contact-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 18px 0;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: var(--grey);
+  }
+  .contact-consent input { margin-top: 3px; accent-color: var(--orange); }
+  .contact-form .btn-primary { width: 100%; justify-content: center; }
+  .contact-form-status {
+    min-height: 1.4em;
+    margin: 12px 0 0 !important;
+    color: var(--grey) !important;
+    font-size: 0.86rem !important;
+    text-align: center;
+  }
+  .contact-form-status[data-state="success"] { color: var(--green) !important; }
+  .contact-form-status[data-state="error"] { color: #b42318 !important; }
+  .contact-honey { position: absolute; left: -9999px; }
+
   /* ── BOTTOM CTA BAR ── */
   .bottom-bar {
     background: var(--off-white);
@@ -841,6 +902,8 @@
     .hero p { margin-left: auto; margin-right: auto; }
     .hero-cta-row { justify-content: center; }
     .hero-mascot-img { width: 240px; height: 240px; }
+    .contact-form { padding: 22px 18px; }
+    .contact-form-grid { grid-template-columns: 1fr; }
     .hero h1 { font-size: 1.5rem; }
     .header-cta { display: none; }
     .mobile-sticky { display: block; }
@@ -1220,13 +1283,44 @@
 </section>
 
 <!-- CTA -->
-<section class="cta-section">
+<section class="cta-section" id="contact">
   <div class="container">
-    <h2>Troublesome Tree?<br>Call us now</h2>
-    <p>Call for a free inspection and fixed written quote. No pressure. No obligation.</p>
+    <h2>Troublesome Tree?<br>Get a free quote</h2>
+    <p>Call or send the details below. No pressure. No obligation.</p>
     <p>Speak to our friendly North East England based team.</p>
     <p class="cta-urgency">Same-day visits usually available. Don't let it sit.</p>
     <a href="tel:07503512953" class="btn-primary">📞 07503 512953</a>
+
+    <form class="contact-form" id="contact-form" action="https://formsubmit.co/ajax/ross@rosswebstertrees.co.uk" method="POST">
+      <input type="hidden" name="_subject" value="New TreeFellingNearMe enquiry">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <label class="contact-honey" aria-hidden="true">Leave this empty<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
+      <div class="contact-form-grid">
+        <div class="contact-field">
+          <label for="contact-name">Name</label>
+          <input id="contact-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="contact-field">
+          <label for="contact-phone">Number</label>
+          <input id="contact-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+        </div>
+        <div class="contact-field contact-field--full">
+          <label for="contact-email">Email</label>
+          <input id="contact-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="contact-field contact-field--full">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" required></textarea>
+        </div>
+      </div>
+      <label class="contact-consent">
+        <input type="checkbox" name="consent" value="Agreed" required>
+        <span>I agree to be contacted about this enquiry.</span>
+      </label>
+      <button type="submit" class="btn-primary">Send enquiry</button>
+      <p class="contact-form-status" id="contact-form-status" role="status" aria-live="polite"></p>
+    </form>
   </div>
 </section>
 
@@ -1295,6 +1389,38 @@
       document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
       if (!wasOpen) item.classList.add('open');
     });
+  });
+
+  const contactForm = document.getElementById('contact-form');
+  const contactStatus = document.getElementById('contact-form-status');
+  contactForm.addEventListener('submit', async event => {
+    event.preventDefault();
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+    contactStatus.textContent = '';
+    contactStatus.dataset.state = '';
+
+    try {
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(contactForm)
+      });
+      const result = await response.json();
+      if (!response.ok || result.success === false) {
+        throw new Error(result.message || 'The form could not be sent.');
+      }
+      contactForm.reset();
+      contactStatus.textContent = 'Thanks. Your enquiry has been sent.';
+      contactStatus.dataset.state = 'success';
+    } catch (error) {
+      contactStatus.textContent = 'That did not send. Please call 07503 512953.';
+      contactStatus.dataset.state = 'error';
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Send enquiry';
+    }
   });
 </script>
 </body>
