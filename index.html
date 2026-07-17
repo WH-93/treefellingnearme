@@ -862,19 +862,31 @@
   }
 
   @media (max-width: 700px) {
+    body { padding-bottom: calc(74px + env(safe-area-inset-bottom)); }
     .hero .container { flex-direction: column; text-align: center; gap: 20px; }
     .hero p { margin-left: auto; margin-right: auto; }
-    .hero-cta-row { justify-content: center; }
+    .hero-cta-row { flex-direction: column; width: 100%; }
+    .hero-cta-row a { width: 100%; justify-content: center; }
     .hero-mascot-img { width: 240px; height: 240px; }
     .contact-form { padding: 22px 18px; }
     .contact-form-grid { grid-template-columns: 1fr; }
     .hero h1 { font-size: 1.5rem; }
     .header-cta { display: none; }
-    .mobile-sticky { display: block; }
+    .mobile-sticky {
+      display: block;
+      padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    }
     .section { padding: 34px 0; }
     .section h2 { font-size: 1.5rem; }
     .services-grid { grid-template-columns: 1fr; }
+    .service-card { padding: 18px 17px; }
+    .service-icon { margin-bottom: 4px; }
+    .service-card .price { margin-bottom: 6px; }
     .cost-grid { grid-template-columns: 1fr; }
+    .cost-card { padding: 18px 16px; }
+    .cost-card .tree-icon { margin-bottom: 4px; }
+    .how-grid { grid-template-columns: 1fr; gap: 24px; }
+    .footer-grid { grid-template-columns: 1fr; }
     .bottom-options { flex-direction: column; }
     .bottom-options a { display: block; }
   }
