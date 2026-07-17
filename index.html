@@ -446,8 +446,9 @@
   .conveyor {
     display: flex;
     gap: 18px;
+    padding-right: 18px;
     width: max-content;
-    animation: scroll-reviews 40s linear infinite;
+    animation: scroll-reviews 52s linear infinite;
   }
   .conveyor:hover { animation-play-state: paused; }
 
@@ -683,70 +684,11 @@
     color: var(--navy);
     white-space: nowrap;
     opacity: 0;
-    animation: rotate-locations 57s linear infinite;
+    transition: opacity 0.22s ease, transform 0.22s ease;
   }
-  /* 57 locations */
-  .location-rotator span:nth-child(1) { animation-delay: 0s; }
-  .location-rotator span:nth-child(2) { animation-delay: 1s; }
-  .location-rotator span:nth-child(3) { animation-delay: 2s; }
-  .location-rotator span:nth-child(4) { animation-delay: 3s; }
-  .location-rotator span:nth-child(5) { animation-delay: 4s; }
-  .location-rotator span:nth-child(6) { animation-delay: 5s; }
-  .location-rotator span:nth-child(7) { animation-delay: 6s; }
-  .location-rotator span:nth-child(8) { animation-delay: 7s; }
-  .location-rotator span:nth-child(9) { animation-delay: 8s; }
-  .location-rotator span:nth-child(10) { animation-delay: 9s; }
-  .location-rotator span:nth-child(11) { animation-delay: 10s; }
-  .location-rotator span:nth-child(12) { animation-delay: 11s; }
-  .location-rotator span:nth-child(13) { animation-delay: 12s; }
-  .location-rotator span:nth-child(14) { animation-delay: 13s; }
-  .location-rotator span:nth-child(15) { animation-delay: 14s; }
-  .location-rotator span:nth-child(16) { animation-delay: 15s; }
-  .location-rotator span:nth-child(17) { animation-delay: 16s; }
-  .location-rotator span:nth-child(18) { animation-delay: 17s; }
-  .location-rotator span:nth-child(19) { animation-delay: 18s; }
-  .location-rotator span:nth-child(20) { animation-delay: 19s; }
-  .location-rotator span:nth-child(21) { animation-delay: 20s; }
-  .location-rotator span:nth-child(22) { animation-delay: 21s; }
-  .location-rotator span:nth-child(23) { animation-delay: 22s; }
-  .location-rotator span:nth-child(24) { animation-delay: 23s; }
-  .location-rotator span:nth-child(25) { animation-delay: 24s; }
-  .location-rotator span:nth-child(26) { animation-delay: 25s; }
-  .location-rotator span:nth-child(27) { animation-delay: 26s; }
-  .location-rotator span:nth-child(28) { animation-delay: 27s; }
-  .location-rotator span:nth-child(29) { animation-delay: 28s; }
-  .location-rotator span:nth-child(30) { animation-delay: 29s; }
-  .location-rotator span:nth-child(31) { animation-delay: 30s; }
-  .location-rotator span:nth-child(32) { animation-delay: 31s; }
-  .location-rotator span:nth-child(33) { animation-delay: 32s; }
-  .location-rotator span:nth-child(34) { animation-delay: 33s; }
-  .location-rotator span:nth-child(35) { animation-delay: 34s; }
-  .location-rotator span:nth-child(36) { animation-delay: 35s; }
-  .location-rotator span:nth-child(37) { animation-delay: 36s; }
-  .location-rotator span:nth-child(38) { animation-delay: 37s; }
-  .location-rotator span:nth-child(39) { animation-delay: 38s; }
-  .location-rotator span:nth-child(40) { animation-delay: 39s; }
-  .location-rotator span:nth-child(41) { animation-delay: 40s; }
-  .location-rotator span:nth-child(42) { animation-delay: 41s; }
-  .location-rotator span:nth-child(43) { animation-delay: 42s; }
-  .location-rotator span:nth-child(44) { animation-delay: 43s; }
-  .location-rotator span:nth-child(45) { animation-delay: 44s; }
-  .location-rotator span:nth-child(46) { animation-delay: 45s; }
-  .location-rotator span:nth-child(47) { animation-delay: 46s; }
-  .location-rotator span:nth-child(48) { animation-delay: 47s; }
-  .location-rotator span:nth-child(49) { animation-delay: 48s; }
-  .location-rotator span:nth-child(50) { animation-delay: 49s; }
-  .location-rotator span:nth-child(51) { animation-delay: 50s; }
-  .location-rotator span:nth-child(52) { animation-delay: 51s; }
-  .location-rotator span:nth-child(53) { animation-delay: 52s; }
-  .location-rotator span:nth-child(54) { animation-delay: 53s; }
-  .location-rotator span:nth-child(55) { animation-delay: 54s; }
-  .location-rotator span:nth-child(56) { animation-delay: 55s; }
-  .location-rotator span:nth-child(57) { animation-delay: 56s; }
-
-  @keyframes rotate-locations {
-    0%, 1.5%   { opacity: 1; transform: translate(-50%, -50%) translateY(0); }
-    2.5%, 100% { opacity: 0; transform: translate(-50%, -50%) translateY(8px); }
+  .location-rotator span.is-active {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
   }
 
   /* ── CTA BAR ── */
@@ -1096,31 +1038,6 @@
         <cite>Karen, Durham</cite>
         <div class="review-meta">4 months ago</div>
       </div>
-      <!-- DUPLICATES for seamless loop -->
-      <div class="review-card">
-        <div class="stars">★★★★★</div>
-        <blockquote>"The team took down a 40ft ash leaning toward the house. Done in a day, site spotless. Wouldn't know a tree had been there."</blockquote>
-        <cite>Michael, Durham</cite>
-        <div class="review-meta">3 weeks ago</div>
-      </div>
-      <div class="review-card">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Had 6 massive conifers along the boundary. Quoted mid-range, turned up when they said, cleared the lot in two days. Proper tidy job."</blockquote>
-        <cite>Sarah, Darlington</cite>
-        <div class="review-meta">1 month ago</div>
-      </div>
-      <div class="review-card">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Emergency callout after the storm brought a tree down across the drive. They were here within two hours. Absolute lifesavers."</blockquote>
-        <cite>Dave, Consett</cite>
-        <div class="review-meta">2 months ago</div>
-      </div>
-      <div class="review-card">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Stump grinding job. Big old beech stump that'd been there for years. Gone in under an hour. Soil leveled. Can't even tell."</blockquote>
-        <cite>Janet, Bishop Auckland</cite>
-        <div class="review-meta">2 months ago</div>
-      </div>
     </div>
   </div>
 </section>
@@ -1275,19 +1192,23 @@
       <h2>🇬🇧 Where we work</h2>
       <p class="section-intro">Tree felling and removal arranged across England, Scotland and Wales.</p>
     </div>
-    <div class="location-rotator">
-      <span>London</span><span>Edinburgh</span><span>Cardiff</span>
+    <div class="location-rotator" aria-hidden="true">
+      <span class="is-active">London</span><span>Edinburgh</span><span>Cardiff</span>
       <span>Manchester</span><span>Glasgow</span><span>Swansea</span>
       <span>Birmingham</span><span>Aberdeen</span><span>Newport</span>
       <span>Leeds</span><span>Dundee</span><span>Wrexham</span>
       <span>Newcastle</span><span>Inverness</span><span>Bangor</span>
-      <span>Sheffield</span><span>Stirling</span><span>Cambridge</span>
-      <span>Liverpool</span><span>Perth</span><span>Oxford</span>
-      <span>York</span><span>Falkirk</span><span>Bristol</span>
-      <span>Nottingham</span><span>Paisley</span><span>Southampton</span>
-      <span>Durham</span><span>Kilmarnock</span><span>Portsmouth</span>
-      <span>Darlington</span><span>East Kilbride</span><span>Plymouth</span>
-      <span>Sunderland</span><span>Hamilton</span><span>Exeter</span>
+      <span>Sheffield</span><span>Stirling</span><span>Bridgend</span>
+      <span>Liverpool</span><span>Perth</span><span>Caerphilly</span>
+      <span>York</span><span>Falkirk</span><span>Aberystwyth</span>
+      <span>Nottingham</span><span>Paisley</span><span>Bristol</span>
+      <span>Durham</span><span>Kilmarnock</span><span>Southampton</span>
+      <span>Darlington</span><span>East Kilbride</span><span>Portsmouth</span>
+      <span>Sunderland</span><span>Hamilton</span><span>Plymouth</span>
+      <span>Cambridge</span><span>Oxford</span><span>Exeter</span>
+      <span>Norwich</span><span>Leicester</span><span>Coventry</span>
+      <span>Hull</span><span>Preston</span><span>Chester</span>
+      <span>Carlisle</span><span>Bradford</span><span>Stoke-on-Trent</span>
     </div>
   </div>
 </section>
@@ -1395,6 +1316,25 @@
 </footer>
 
 <script>
+  const reviewConveyor = document.querySelector('.conveyor');
+  if (reviewConveyor) {
+    Array.from(reviewConveyor.children).forEach(card => {
+      const duplicate = card.cloneNode(true);
+      duplicate.setAttribute('aria-hidden', 'true');
+      reviewConveyor.appendChild(duplicate);
+    });
+  }
+
+  const locations = Array.from(document.querySelectorAll('.location-rotator span'));
+  let locationIndex = 0;
+  if (locations.length > 1) {
+    setInterval(() => {
+      locations[locationIndex].classList.remove('is-active');
+      locationIndex = (locationIndex + 1) % locations.length;
+      locations[locationIndex].classList.add('is-active');
+    }, 1100);
+  }
+
   document.querySelectorAll('.faq-q').forEach(q => {
     q.addEventListener('click', () => {
       const item = q.parentElement;
