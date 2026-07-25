@@ -180,7 +180,7 @@
 
   /* ── HERO ── */
   .hero {
-    background: linear-gradient(170deg, var(--navy) 0%, #222 40%, #1a1a1a 100%);
+    background: linear-gradient(170deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 100%), url('hero-bg.jpg') center/cover no-repeat;
     color: var(--white);
     padding: 48px 0 40px;
     position: relative;
@@ -189,12 +189,8 @@
   .hero::before {
     content: '';
     position: absolute;
-    top: -30%;
-    right: -15%;
-    width: 520px;
-    height: 520px;
-    background: radial-gradient(circle, var(--orange-glow) 0%, transparent 65%);
-    border-radius: 50%;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 70% 30%, var(--orange-glow) 0%, transparent 50%);
     pointer-events: none;
   }
   .hero .container {
