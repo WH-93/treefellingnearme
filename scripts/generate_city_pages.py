@@ -118,6 +118,7 @@ def page(city):
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{escape(title)}</title>
 <meta name="description" content="{escape(description)}">
+<link rel="icon" type="image/png" href="/mascot.png">
 <meta name="robots" content="index, follow"><link rel="canonical" href="{url}">
 <meta property="og:type" content="website"><meta property="og:title" content="{escape(title)}"><meta property="og:description" content="{escape(description)}"><meta property="og:url" content="{url}"><meta property="og:image" content="{BASE}/mascot.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/city.css">
