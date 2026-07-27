@@ -342,6 +342,9 @@
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 16px;
   }
+  .city-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .service-card {
     background: var(--white);
     border: 1px solid var(--border);
@@ -1129,7 +1132,7 @@
       <h2>Start with your nearest city</h2>
       <p class="section-intro">Each city page covers local tree felling, tree removal, stump grinding, access issues and permission checks. We are starting with ten areas rather than publishing thin pages for every town at once.</p>
     </div>
-    <div class="services-grid">
+    <div class="services-grid city-grid">
       <a class="service-card" href="/manchester/" style="text-decoration:none;color:inherit"><h3>Manchester</h3><p>Tree surgeons across Greater Manchester, including Salford, Stockport, Trafford and Rochdale.</p></a>
       <a class="service-card" href="/leeds/" style="text-decoration:none;color:inherit"><h3>Leeds</h3><p>Tree felling and removal across Leeds and West Yorkshire.</p></a>
       <a class="service-card" href="/liverpool/" style="text-decoration:none;color:inherit"><h3>Liverpool</h3><p>Tree removal across Liverpool, Knowsley, Sefton and nearby Merseyside areas.</p></a>
